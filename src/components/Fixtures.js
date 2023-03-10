@@ -60,7 +60,7 @@ const Fixtures = () => {
             <h1 className='display-5 text-center mb-3 fw-bold'><img src={logoHead} />Fixtures</h1>
           </Col>
           <Col xs="12">
-            <h2 className='mb-3 fw-bold'>
+            <h2 className='mb-4 fw-bold'>
               {currentDate}/{currentMonth + 1}/{currentYear}
             </h2>
           </Col>
@@ -75,7 +75,7 @@ const Fixtures = () => {
             })
             :
             fixtures.length === 0 && requestSuccessful ?
-              <h2>There are no matches today.</h2>
+              <h2 className='text-center'>There are no matches today.</h2>
               :
               error ? 
                 <Error error={error} /> 

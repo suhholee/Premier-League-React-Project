@@ -54,7 +54,7 @@ const CurrentTable = () => {
       <Container>
         <Row>
           <Col xs="12">
-            <h1 className='display-5 text-center mt-3 mb-4 fw-bold'><img src={logoHead} />Premier League Table</h1>
+            <h1 className='display-5 text-center mb-4 fw-bold'><img src={logoHead} />Premier League Table</h1>
           </Col>
           {table.length > 0 ?
             <Table borderless size="sm">
