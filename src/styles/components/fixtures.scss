@@ -1,0 +1,16 @@
+.fixtures {
+  color: $purple;
+}
+
+.match {
+  margin-bottom: 20px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(56, 0, 60, 0.2);
+  border-bottom: 1px solid rgba(56, 0, 60, 0.2);
+}
+
+.match-crest {
+  max-width: 50px;
+  width: calc(2rem + 6vw);
+  margin: 0 10px;
+}

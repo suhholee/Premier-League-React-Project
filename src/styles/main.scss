@@ -1,3 +1,7 @@
-* {
-  box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+@import './global/variables';
+@import './global/base';
+@import './components/table';
+@import './components/fixtures';
+@import './components/navbar'
