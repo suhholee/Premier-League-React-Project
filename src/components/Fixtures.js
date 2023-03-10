@@ -32,9 +32,12 @@ const Fixtures = () => {
 
   // ! On Mount
   useEffect(() => {
-    // This function will get the current Premier League table
+    // This function will get the current Premier League fixtures
     const getFixtures = async () => {
       try {
+        // As the Premier League season starts in August to May of next year, checking the current month is necessary to pass through the current year, as the 2022-23 season's value is 2022.
+        // If current month is before August, current year is subtracted by 1.
+        // If the current month is after August, current year is remained the same.
         if (currentMonth < 7) {
           const { data: { matches } } = await authenticated.get(`/competitions/2021/matches?season=${currentYear - 1}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
           setFixtures(matches)
@@ -66,17 +69,22 @@ const Fixtures = () => {
           </Col>
           {fixtures.length > 0 ? 
             fixtures.map(match => {
-              const { id, homeTeam: { name: homeTeamName, crest: homeTeamCrest }, awayTeam: { name: awayTeamName, crest: awayTeamCrest } } = match
+              const { id, homeTeam: { name: homeTeamName, crest: homeTeamCrest }, awayTeam: { name: awayTeamName, crest: awayTeamCrest }, utcDate } = match
+              // Cutting the utcDate in to just the start time of the game
+              const time = utcDate.split('').slice(11, 16).join('')
               return (
                 <Col key={id} sm="12" className='match text-center'>
                   <h3><span>{homeTeamName} <img className='match-crest' src={homeTeamCrest} /></span> vs <span><img className='match-crest' src={awayTeamCrest} />{awayTeamName}</span></h3>
+                  <h4 className='mt-4'>Kick Off: {time}</h4>
                 </Col>
               )
             })
             :
+            // If the request was successful but the fixtures array is empty, it means that there are no matches today.
             fixtures.length === 0 && requestSuccessful ?
               <h2 className='text-center'>There are no matches today.</h2>
               :
+              // If there is an error, we print out the error on display. Else, the data is still loading, so the spinner is displayed.
               error ? 
                 <Error error={error} /> 
                 : 

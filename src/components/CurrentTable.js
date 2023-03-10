@@ -32,6 +32,9 @@ const CurrentTable = () => {
     // This function will get the current Premier League table
     const getTable = async () => {
       try {
+        // As the Premier League season starts in August to May of next year, checking the current month is necessary to pass through the current year, as the 2022-23 season's value is 2022.
+        // If current month is before August, current year is subtracted by 1.
+        // If the current month is after August, current year is remained the same.
         if (currentMonth < 7) {
           const { data: { standings } } = await authenticated.get(`/competitions/2021/standings?season=${currentYear - 1}`)
           const { table } = standings[0]
@@ -56,6 +59,7 @@ const CurrentTable = () => {
           <Col xs="12">
             <h1 className='display-5 text-center mb-4 fw-bold'><img src={logoHead} />Premier League Table</h1>
           </Col>
+          {/* Implementing a react bootstrap table */}
           {table.length > 0 ?
             <Table borderless size="sm">
               <thead>
@@ -89,6 +93,7 @@ const CurrentTable = () => {
               })}
             </Table>
             :
+            // If there is an error, we print out the error on display. Else, the data is still loading, so the spinner is displayed.
             <>
               { error ? 
                 <Error error={error} /> 
