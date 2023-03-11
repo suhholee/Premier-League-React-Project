@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <main className='home'>
       <div className='hero'>
-        <h1 className='display-4 text-center mt-3 mb-4 fw-bold'><img src={logoHead} />Welcome to Premier League Today!</h1>
+        <h1 className='display-4 text-center mt-3 mb-4 fw-bold'><img src={logoHead} />Welcome to the 2022/23 Premier League!</h1>
         <p className='lead display-6 mb-5'>Explore the website to see...</p>
         <Button to="/fixtures" as={Link} className='button display-6'>Today&#39;s Fixtures</Button>
         <Button to="/results" as={Link} className='button display-6'>Past Results</Button>

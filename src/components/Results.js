@@ -11,6 +11,7 @@ import Error from './common/Error'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
 
 // Import image
 import logoHead from '../assets/logo-head.png'
@@ -18,28 +19,46 @@ import logoHead from '../assets/logo-head.png'
 const Results = () => {
 
   // ! State
-  const [ fixtures, setFixtures ] = useState([])
-  const [ filteredMatches, setFilteredMatches ] = useState([])
-  const [ currentSeasonFilter, setCurrentSeasonFilter ] = useState('2022')
-  const [ currentMatchdayFilter, setCurrentMatchdayFilter ] = useState('')
+  const [ results, setResults ] = useState([])
+  const [ filteredResults, setFilteredResults ] = useState([])
+  const [ currentMatchdayFilter, setCurrentMatchdayFilter ] = useState('All')
   const [ error, setError ] = useState('')
-  const [ requestSuccessful, setRequestSuccessful ] = useState(false)
 
   // ! On Mount
   useEffect(() => {
     // This function will get the current Premier League fixtures
-    const getFixtures = async () => {
+    const getResults = async () => {
       try {
         const { data: { matches } } = await authenticated.get('/competitions/2021/matches?season=2022&status=FINISHED')
-        setFixtures(matches)
-        setRequestSuccessful(true)
+        setResults(matches)
       } catch (err) {
         console.log(err)
         setError(err.message)
       }
     }
-    getFixtures()
+    getResults()
   }, [])
+
+  // ! Matchday Filter
+  // Getting all the matchdays within the results array and setting them as options
+  const getMatchday = () => {
+    return [...new Set(results.map(result => result.matchday))].sort((a, b) => b - a).map(matchday => {
+      return <option key={matchday} value={matchday}>Matchday {matchday}</option>
+    })
+  }
+
+  useEffect(() => {
+    filterMatchday(currentMatchdayFilter)
+  }, [results])
+
+  // Filter the season with the value of each options and call the corresponding API
+  const filterMatchday = (value) => {
+    setCurrentMatchdayFilter(value)
+    const filteredArray = results.filter(result => result.matchday === value || value === 'All')
+    console.log(filteredArray)
+    setFilteredResults(filteredArray)
+  }
+
 
   return (
     <main>
@@ -48,12 +67,21 @@ const Results = () => {
           <Col xs="12">
             <h1 className='display-5 text-center mb-3 fw-bold'><img src={logoHead} />Results</h1>
           </Col>
+          <Col xs="4">
+            <Form.Label>Select Matchday</Form.Label>
+            <Form.Select className='mb-4' onChange={(e) => filterMatchday(e.target.value)}>
+              <option value='All'>All</option>
+              {results.length && getMatchday()}
+            </Form.Select>
+          </Col>
           <div className='results-container'>
-            {fixtures.length > 0 && requestSuccessful ? 
-              fixtures.map(match => {
+            {filteredResults.length > 0 ? 
+              filteredResults.map(match => {
                 const { id, homeTeam: { name: homeTeamName, crest: homeTeamCrest }, awayTeam: { name: awayTeamName, crest: awayTeamCrest }, utcDate, score: { fullTime: { home, away } }, matchday } = match
                 // Cutting the utcDate in to just the start time of the game
-                const time = utcDate.split('').slice(0, 10).join('')
+                const day = utcDate.split('').slice(8, 10).join('')
+                const month = utcDate.split('').slice(5, 7).join('')
+                const year = utcDate.split('').slice(0, 4).join('')
                 return (
                   <Col key={id} xs="12" className='results text-center'>
                     <h4 className='mb-3'>Matchday {matchday}</h4>
@@ -70,7 +98,7 @@ const Results = () => {
                         {awayTeamName}
                       </span>
                     </h3>
-                    <h4 className='mt-2'>{time}</h4>
+                    <h4 className='mt-2'>{day}-{month}-{year}</h4>
                   </Col>
                 )
               })
