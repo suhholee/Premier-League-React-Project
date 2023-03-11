@@ -8,6 +8,7 @@ import CurrentTable from './components/CurrentTable'
 import Fixtures from './components/Fixtures'
 import Results from './components/Results'
 import Stats from './components/Stats'
+import Footer from './components/common/Footer'
 
 const App = () => {
   // Add slash in the beginning of the request ie) /v4/competitions
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/stats" element={<Stats />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   )

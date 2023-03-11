@@ -20,22 +20,22 @@ const Stats = () => {
   let rank = 0
 
   // ! State
-  const [ scorerTable, setScorerTable ] = useState([])
+  const [ stats, setStats ] = useState([])
   const [ error, setError ] = useState('')
 
   // ! On Mount
   useEffect(() => {
     // This function will get the current Premier League table
-    const getScorerTable = async () => {
+    const getStats = async () => {
       try {
         const { data: { scorers } } = await authenticated.get('/competitions/2021/scorers')
-        setScorerTable(scorers)
+        setStats(scorers)
       } catch (err) {
         console.log(err)
         setError(err.message)
       }
     }
-    getScorerTable()
+    getStats()
   }, [])
 
   return (
@@ -43,11 +43,11 @@ const Stats = () => {
       <Container>
         <Row>
           <Col xs="12">
-            <h1 className='display-5 text-center fw-bold'><img src={logoHead} />Top Scorers</h1>
-            <p className='mb-4'>Refresh the page to update the top scorers.</p>
+            <h1 className='display-5 text-center fw-bold'><img src={logoHead} />Player Statistics</h1>
+            <p className='mb-4'>Refresh the page to update the player statistics.</p>
           </Col>
           {/* Implementing a react bootstrap table */}
-          {scorerTable.length > 0 ?
+          {stats.length > 0 ?
             <Table hover borderless size="md">
               {/* Headers */}
               <thead>
@@ -60,7 +60,7 @@ const Stats = () => {
                 </tr>
               </thead>
               {/* Body */}
-              {scorerTable.map(player => {
+              {stats.map(player => {
                 const { player: { id, name: playerName }, team: { crest, name: teamName }, goals, assists, penalties } = player
                 rank = rank + 1
                 return (
