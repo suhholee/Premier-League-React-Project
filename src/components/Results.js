@@ -22,6 +22,7 @@ const Results = () => {
   const [ results, setResults ] = useState([])
   const [ filteredResults, setFilteredResults ] = useState([])
   const [ currentMatchdayFilter, setCurrentMatchdayFilter ] = useState('All')
+  const [ currentTeamFilter, setCurrentTeamFilter ] = useState('All')
   const [ error, setError ] = useState('')
 
   // ! On Mount
@@ -38,26 +39,25 @@ const Results = () => {
     }
     getResults()
   }, [])
-
-  // ! Matchday Filter
+  
+  // ! Teams Filter
   // Getting all the matchdays within the results array and setting them as options
-  const getMatchday = () => {
-    return [...new Set(results.map(result => result.matchday))].sort((a, b) => b - a).map(matchday => {
-      return <option key={matchday} value={matchday}>Matchday {matchday}</option>
+  const getTeams = () => {
+    return [...new Set(results.map(result => result.homeTeam.name && result.awayTeam.name))].sort().map(team => {
+      return <option key={team} value={team}>{team}</option>
     })
   }
-
-  useEffect(() => {
-    filterMatchday(currentMatchdayFilter)
-  }, [results])
-
+  
   // Filter the season with the value of each options and call the corresponding API
-  const filterMatchday = (value) => {
-    setCurrentMatchdayFilter(value)
-    const filteredArray = results.filter(result => result.matchday === value || value === 'All')
-    console.log(filteredArray)
+  const filterTeams = (value) => {
+    setCurrentTeamFilter(value)
+    const filteredArray = results.filter(result => result.homeTeam.name === value || result.awayTeam.name === value || value === 'All')
     setFilteredResults(filteredArray)
   }
+  
+  useEffect(() => {
+    filterTeams(currentTeamFilter)
+  }, [results])
 
 
   return (
@@ -65,13 +65,13 @@ const Results = () => {
       <Container className='fixtures'>
         <Row>
           <Col xs="12">
-            <h1 className='display-5 text-center mb-3 fw-bold'><img src={logoHead} />Results</h1>
+            <h1 className='display-5 text-center fw-bold'><img src={logoHead} />Results</h1>
           </Col>
-          <Col xs="4">
-            <Form.Label>Select Matchday</Form.Label>
-            <Form.Select className='mb-4' onChange={(e) => filterMatchday(e.target.value)}>
+          <Col xs='6' className='filters'>
+            <Form.Label>Filter by Club</Form.Label>
+            <Form.Select className='mb-4' onChange={(e) => filterTeams(e.target.value)}>
               <option value='All'>All</option>
-              {results.length && getMatchday()}
+              {results.length && getTeams()}
             </Form.Select>
           </Col>
           <div className='results-container'>
@@ -84,7 +84,7 @@ const Results = () => {
                 const year = utcDate.split('').slice(0, 4).join('')
                 return (
                   <Col key={id} xs="12" className='results text-center'>
-                    <h4 className='mb-3'>Matchday {matchday}</h4>
+                    <h4 className='mb-4'>{day}-{month}-{year}</h4>
                     <h3>
                       <span className='home-team'>
                         {homeTeamName} 
@@ -98,7 +98,6 @@ const Results = () => {
                         {awayTeamName}
                       </span>
                     </h3>
-                    <h4 className='mt-2'>{day}-{month}-{year}</h4>
                   </Col>
                 )
               })
