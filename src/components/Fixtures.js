@@ -23,7 +23,8 @@ const Fixtures = () => {
   const currentMonth = new Date().getMonth()
   // Current date needs to be passed in order to bring in the data for today's fixtures
   const currentDate = new Date().getDate()
-  const fullDateString = `${currentYear}-0${currentMonth + 1}-${currentDate}`
+  // Full date string is used inside the API link. 0 in front of the month isn't added for October, November, and December
+  let fullDateString
 
   // ! State
   const [ fixtures, setFixtures ] = useState([])
@@ -38,14 +39,24 @@ const Fixtures = () => {
         // As the Premier League season starts in August to May of next year, checking the current month is necessary to pass through the current year, as the 2022-23 season's value is 2022.
         // If current month is before August, current year is subtracted by 1.
         // If the current month is after August, current year is remained the same.
+        // The fullDateString needs to be passed differently for months below 9 because the API link requires a YYYY/MM/DD format
         if (currentMonth < 7) {
+          fullDateString = `${currentYear}-0${currentMonth + 1}-${currentDate}`
           const { data: { matches } } = await authenticated.get(`/competitions/2021/matches?season=${currentYear - 1}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
           setFixtures(matches)
           setRequestSuccessful(true)
         } else if (currentMonth >= 7) {
-          const { data: { matches } } = await authenticated.get(`/competitions/2021/standings?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
-          setFixtures(matches)
-          setRequestSuccessful(true)
+          if (currentMonth >= 9) {
+            fullDateString = `${currentYear}-${currentMonth + 1}-${currentDate}`
+            const { data: { matches } } = await authenticated.get(`/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
+            setFixtures(matches)
+            setRequestSuccessful(true)
+          } else {
+            fullDateString = `${currentYear}-0${currentMonth + 1}-${currentDate}`
+            const { data: { matches } } = await authenticated.get(`/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
+            setFixtures(matches)
+            setRequestSuccessful(true)
+          }
         }
       } catch (err) {
         console.log(err)
@@ -53,6 +64,9 @@ const Fixtures = () => {
       }
     }
     getFixtures()
+
+    // Updating the match score every 10 seconds
+    setInterval(getFixtures, 10000)
   }, [])
 
   return (
@@ -60,14 +74,14 @@ const Fixtures = () => {
       <Container className='fixtures'>
         <Row>
           <Col xs="12">
-            <h1 className='display-5 text-center mb-3 fw-bold'><img src={logoHead} />Fixtures</h1>
+            <h1 className='display-5 text-center mb-3 fw-bold'><img src={logoHead} />Today&#39;s Fixtures</h1>
           </Col>
           <Col xs="12">
             <h2 className='mb-4 fw-bold'>
               {currentDate}/{currentMonth + 1}/{currentYear}
             </h2>
           </Col>
-          {fixtures.length > 0 ? 
+          {fixtures.length > 0 && requestSuccessful ? 
             fixtures.map(match => {
               const { id, homeTeam: { name: homeTeamName, crest: homeTeamCrest }, awayTeam: { name: awayTeamName, crest: awayTeamCrest }, utcDate, score: { fullTime: { home, away } } } = match
               // Cutting the utcDate in to just the start time of the game
@@ -78,16 +92,16 @@ const Fixtures = () => {
                     <span className='home-team'>
                       {homeTeamName} 
                       <img className='match-crest' src={homeTeamCrest} />
-                      {home === null ? '0' : home}
+                      {home === null ? '' : home}
                     </span>
                     vs 
                     <span className='away-team'>
-                      {away === null ? '0' : away}
+                      {away === null ? '' : away}
                       <img className='match-crest' src={awayTeamCrest} />
                       {awayTeamName}
                     </span>
                   </h3>
-                  <h4 className='mt-4'>Kick Off: {time}</h4>
+                  <h4 className='mt-4'>Kick Off &#40;GMT&#41;: {time}</h4>
                 </Col>
               )
             })

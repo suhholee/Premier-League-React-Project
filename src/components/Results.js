@@ -19,7 +19,7 @@ const Results = () => {
       <Container>
         <Row>
           <Col xs="12">
-            <h1 className='display-3 text-center mb-5 fw-bold'><img src={logoHead} />Results</h1>
+            <h1 className='display-5 text-center mb-3 fw-bold'><img src={logoHead} />Results</h1>
           </Col>
         </Row>
       </Container>

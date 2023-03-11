@@ -62,6 +62,7 @@ const CurrentTable = () => {
           {/* Implementing a react bootstrap table */}
           {table.length > 0 ?
             <Table borderless size="sm">
+              {/* Headers */}
               <thead>
                 <tr>
                   <th>Position</th>
@@ -74,6 +75,7 @@ const CurrentTable = () => {
                   <th className='text-center'>Points</th>
                 </tr>
               </thead>
+              {/* Body */}
               {table.map(rank => {
                 const { position, team: { name, id, crest }, playedGames, won, draw, lost, goalDifference, points } = rank
                 return (
