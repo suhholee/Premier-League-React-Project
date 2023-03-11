@@ -1,7 +1,7 @@
 
 const Footer = () => {
   return (
-    <footer className="text-center">© Created by Suhho Lee</footer>
+    <footer className="text-center pt-2 pb-2">© Created by Suhho Lee</footer>
   )
 }
 

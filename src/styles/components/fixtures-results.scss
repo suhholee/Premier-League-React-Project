@@ -2,6 +2,22 @@
   color: $purple;
 }
 
+.search {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-bar {
+  display: flex;
+}
+
+// .search-button {
+//   background-color: $green;
+//   color: $purple;
+//   border: 1px solid $green;
+//   margin-left: 5px;
+// }
+
 .results-container {
   display: flex;
   flex-direction: column-reverse;
