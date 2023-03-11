@@ -57,7 +57,8 @@ const CurrentTable = () => {
       <Container>
         <Row>
           <Col xs="12">
-            <h1 className='display-5 text-center mb-4 fw-bold'><img src={logoHead} />Premier League Table</h1>
+            <h1 className='display-5 text-center fw-bold'><img src={logoHead} />Premier League Table</h1>
+            <p className='mb-4'>Refresh the page to update the table.</p>
           </Col>
           {/* Implementing a react bootstrap table */}
           {table.length > 0 ?

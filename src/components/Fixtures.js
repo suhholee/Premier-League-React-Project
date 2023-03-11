@@ -63,8 +63,8 @@ const Fixtures = () => {
     }
     getFixtures()
 
-    // Updating the match score every 1 minute
-    setInterval(getFixtures, 60000)
+    // // Updating the match score every 1 minute
+    // setInterval(getFixtures, 60000)
   }, [])
 
   return (
@@ -73,8 +73,7 @@ const Fixtures = () => {
         <Row>
           <Col xs="12">
             <h1 className='display-5 text-center mb-3 fw-bold'><img src={logoHead} />Today&#39;s Fixtures</h1>
-          </Col>
-          <Col xs="12">
+            <p className='mb-4'>Refresh the page to update the fixtures.</p>
             <h2 className='mb-4 fw-bold'>
               {currentDate}/{currentMonth + 1}/{currentYear}
             </h2>

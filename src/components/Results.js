@@ -64,7 +64,8 @@ const Results = () => {
       <Container className='fixtures'>
         <Row>
           <Col xs="12">
-            <h1 className='display-5 text-center fw-bold'><img src={logoHead} />Results</h1>
+            <h1 className='display-5 text-center mb-3 fw-bold'><img src={logoHead} />Results</h1>
+            <p className='mb-1'>Refresh the page to update the results.</p>
           </Col>
           <Col xs='6'>
             <Form.Label>Filter by Club</Form.Label>
