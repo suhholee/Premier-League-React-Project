@@ -58,19 +58,20 @@ const Results = () => {
     setFilteredResults(filteredArray)
   }
 
-  // ! Search Games
-  const searchGames = (value) => {
+  // ! Search Results
+  const searchResults = (value) => {
     setSearch(value)
     const regex = new RegExp(search, 'i')
     const filteredArray = results.filter(result => 
-      (regex.test(result.homeTeam.name) || regex.test(result.awayTeam.name)) && (result.homeTeam.name === currentTeamFilter || result.awayTeam.name === currentTeamFilter || currentTeamFilter === 'All'))
+      (regex.test(result.homeTeam.name) || regex.test(result.awayTeam.name)) && 
+      (result.homeTeam.name === currentTeamFilter || result.awayTeam.name === currentTeamFilter || currentTeamFilter === 'All'))
     setFilteredResults(filteredArray)
   }
   
   useEffect(() => {
     filterTeams(currentTeamFilter)
-    searchGames(search)
-  }, [results, filteredResults])
+    searchResults(search)
+  }, [results])
 
 
   return (
@@ -91,11 +92,12 @@ const Results = () => {
               </Form.Select>
             </Form.Group>
           </Col>
+          {/* Search Clubs */}
           <Col xs="6">
             <Form.Group className="search mb-3" controlId="formSearchGames">
               <Form.Label>Search Results by Club Name</Form.Label>
               <div className='search-bar'>
-                <Form.Control type="text" placeholder="Search..." onChange={(e) => searchGames(e.target.value)}/>
+                <Form.Control type="text" placeholder="Search..." onChange={(e) => searchResults(e.target.value)}/>
                 {/* <Button className="search-button" type="submit">Search</Button> */}
               </div>
             </Form.Group>
