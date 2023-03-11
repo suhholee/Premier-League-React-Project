@@ -21,7 +21,6 @@ const Results = () => {
   // ! State
   const [ results, setResults ] = useState([])
   const [ filteredResults, setFilteredResults ] = useState([])
-  const [ currentMatchdayFilter, setCurrentMatchdayFilter ] = useState('All')
   const [ currentTeamFilter, setCurrentTeamFilter ] = useState('All')
   const [ error, setError ] = useState('')
 
@@ -67,7 +66,7 @@ const Results = () => {
           <Col xs="12">
             <h1 className='display-5 text-center fw-bold'><img src={logoHead} />Results</h1>
           </Col>
-          <Col xs='6' className='filters'>
+          <Col xs='6'>
             <Form.Label>Filter by Club</Form.Label>
             <Form.Select className='mb-4' onChange={(e) => filterTeams(e.target.value)}>
               <option value='All'>All</option>

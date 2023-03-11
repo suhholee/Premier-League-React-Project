@@ -44,20 +44,18 @@ const Fixtures = () => {
           fullDateString = `${currentYear}-0${currentMonth + 1}-${currentDate}`
           const { data: { matches } } = await authenticated.get(`/competitions/2021/matches?season=${currentYear - 1}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
           setFixtures(matches)
-          setRequestSuccessful(true)
         } else if (currentMonth >= 7) {
           if (currentMonth >= 9) {
             fullDateString = `${currentYear}-${currentMonth + 1}-${currentDate}`
             const { data: { matches } } = await authenticated.get(`/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
             setFixtures(matches)
-            setRequestSuccessful(true)
           } else {
             fullDateString = `${currentYear}-0${currentMonth + 1}-${currentDate}`
             const { data: { matches } } = await authenticated.get(`/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
             setFixtures(matches)
-            setRequestSuccessful(true)
           }
         }
+        setRequestSuccessful(true)
       } catch (err) {
         console.log(err)
         setError(err.message)
@@ -65,7 +63,7 @@ const Fixtures = () => {
     }
     getFixtures()
 
-    // Updating the match score every 10 seconds
+    // Updating the match score every 1 minute
     setInterval(getFixtures, 60000)
   }, [])
 

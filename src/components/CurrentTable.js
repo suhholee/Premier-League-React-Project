@@ -73,11 +73,13 @@ const CurrentTable = () => {
                   <th className='text-center'>Lost</th>
                   <th className='text-center'>GD</th>
                   <th className='text-center'>Points</th>
+                  <th className='text-center'>Form</th>
                 </tr>
               </thead>
               {/* Body */}
               {table.map(rank => {
-                const { position, team: { name, id, crest }, playedGames, won, draw, lost, goalDifference, points } = rank
+                const { position, team: { name, id, crest }, playedGames, won, draw, lost, goalDifference, points, form } = rank
+                const newForm = form.split(',').join('  ')
                 return (
                   <tbody key={id}>
                     <tr>
@@ -89,6 +91,7 @@ const CurrentTable = () => {
                       <td className='text-center'>{lost}</td>
                       <td className='text-center'>{goalDifference}</td>
                       <td className='text-center'>{points}</td>
+                      <td className='text-center'>{newForm}</td>
                     </tr>
                   </tbody>
                 )
