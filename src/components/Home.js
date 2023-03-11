@@ -13,7 +13,7 @@ const Home = () => {
         <Button to="/fixtures" as={Link} className='button display-6'>Today&#39;s Fixtures</Button>
         <Button to="/results" as={Link} className='button display-6'>Past Results</Button>
         <Button to="/table" as={Link} className='button display-6'>Current Premier League Table</Button>
-        <Button to="/scorers" as={Link} className='button display-6'>Current Top Scorers</Button>
+        <Button to="/stats" as={Link} className='button display-6'>Top Scorers</Button>
       </div>
     </main>
   )

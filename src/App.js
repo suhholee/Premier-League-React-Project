@@ -7,6 +7,7 @@ import Home from './components/Home'
 import CurrentTable from './components/CurrentTable'
 import Fixtures from './components/Fixtures'
 import Results from './components/Results'
+import Stats from './components/Stats'
 
 const App = () => {
   // Add slash in the beginning of the request ie) /v4/competitions
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/fixtures" element={<Fixtures />} />
           <Route path="/results" element={<Results />} />
           <Route path="/table" element={<CurrentTable />} />
+          <Route path="/stats" element={<Stats />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

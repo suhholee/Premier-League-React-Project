@@ -62,19 +62,19 @@ const CurrentTable = () => {
           </Col>
           {/* Implementing a react bootstrap table */}
           {table.length > 0 ?
-            <Table borderless size="sm">
+            <Table hover borderless size="sm">
               {/* Headers */}
               <thead>
-                <tr>
+                <tr className='text-center'>
                   <th>Position</th>
-                  <th>Club</th>
-                  <th className='text-center'>Played</th>
-                  <th className='text-center'>Won</th>
-                  <th className='text-center'>Draw</th>
-                  <th className='text-center'>Lost</th>
-                  <th className='text-center'>GD</th>
-                  <th className='text-center'>Points</th>
-                  <th className='text-center'>Form</th>
+                  <th className='text-start'>Club</th>
+                  <th>Played</th>
+                  <th>Won</th>
+                  <th>Draw</th>
+                  <th>Lost</th>
+                  <th>GD</th>
+                  <th>Points</th>
+                  <th>Form</th>
                 </tr>
               </thead>
               {/* Body */}
@@ -83,16 +83,16 @@ const CurrentTable = () => {
                 const newForm = form.split(',').join('  ')
                 return (
                   <tbody key={id}>
-                    <tr>
+                    <tr className='text-center'>
                       <td>{position}</td>
-                      <td><img className='crest' src={crest}></img>{name}</td>
-                      <td className='text-center'>{playedGames}</td>
-                      <td className='text-center'>{won}</td>
-                      <td className='text-center'>{draw}</td>
-                      <td className='text-center'>{lost}</td>
-                      <td className='text-center'>{goalDifference}</td>
-                      <td className='text-center'>{points}</td>
-                      <td className='text-center'>{newForm}</td>
+                      <td className='text-start'><img className='crest' src={crest}></img>{name}</td>
+                      <td>{playedGames}</td>
+                      <td>{won}</td>
+                      <td>{draw}</td>
+                      <td>{lost}</td>
+                      <td>{goalDifference}</td>
+                      <td>{points}</td>
+                      <td>{newForm}</td>
                     </tr>
                   </tbody>
                 )
