@@ -62,16 +62,13 @@ const Fixtures = () => {
       }
     }
     getFixtures()
-
-    // // Updating the match score every 1 minute
-    // setInterval(getFixtures, 60000)
   }, [])
 
   return (
     <main>
       <Container className='fixtures'>
         <Row>
-          <Col xs="12">
+          <Col xs="12" className='flex-center'>
             <h1 className='display-5 text-center mb-3 fw-bold'><img src={logoHead} />Today&#39;s Fixtures</h1>
             <p className='mb-4'>Refresh the page to update the fixtures.</p>
             <h2 className='mb-4 fw-bold'>

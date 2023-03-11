@@ -56,7 +56,7 @@ const CurrentTable = () => {
     <main>
       <Container>
         <Row>
-          <Col xs="12">
+          <Col xs="12" className='flex-center'>
             <h1 className='display-5 text-center fw-bold'><img src={logoHead} />Premier League Table</h1>
             <p className='mb-4'>Refresh the page to update the table.</p>
           </Col>

@@ -78,7 +78,7 @@ const Results = () => {
     <main>
       <Container className='fixtures'>
         <Row>
-          <Col xs="12">
+          <Col xs="12" className='flex-center'>
             <h1 className='display-5 text-center mb-3 fw-bold'><img src={logoHead} />Results</h1>
             <p className='mb-3'>Refresh the page to update the results.</p>
           </Col>
@@ -130,7 +130,7 @@ const Results = () => {
                 )
               })
               :
-              // If the request was successful but the fixtures array is empty, it means that there are no matches today.
+              // If the request was successful but the filtered results array is empty, it means that there are no matches found.
               filteredResults.length === 0 && requestSuccessful ?
                 <h2 className='text-center'>No matches were found.</h2>
                 :

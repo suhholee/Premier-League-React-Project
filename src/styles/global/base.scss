@@ -18,6 +18,11 @@ main {
   }
 }
 
+.flex-center {
+  @extend %flex-center;
+  flex-direction: column;
+}
+
 .spinner {
   img {
     width: 30px;

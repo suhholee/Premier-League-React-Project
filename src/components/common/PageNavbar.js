@@ -15,7 +15,6 @@ const PageNavbar = () => {
   const location = useLocation()
 
   useEffect(() => {
-    // console.log(location)
   }, [location])
 
   return (
