@@ -2,7 +2,12 @@
   color: $purple;
 }
 
-.match {
+.results-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.match, .results {
   margin-bottom: 20px;
   padding: 20px 0;
   border-top: 1px solid rgba(56, 0, 60, 0.2);

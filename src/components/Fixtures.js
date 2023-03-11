@@ -66,7 +66,7 @@ const Fixtures = () => {
     getFixtures()
 
     // Updating the match score every 10 seconds
-    setInterval(getFixtures, 10000)
+    setInterval(getFixtures, 60000)
   }, [])
 
   return (

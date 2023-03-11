@@ -18,8 +18,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/fixtures" element={<Fixtures />} />
-          <Route path="/table" element={<CurrentTable />} />
           <Route path="/results" element={<Results />} />
+          <Route path="/table" element={<CurrentTable />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

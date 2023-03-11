@@ -27,8 +27,8 @@ const PageNavbar = () => {
           <Nav>
             <Nav.Link to="/" as={Link} className={location.pathname === '/' ? 'square border-bottom border-white' : ''}>Home</Nav.Link>
             <Nav.Link to="/fixtures" as={Link} className={location.pathname === '/fixtures' ? 'square border-bottom border-white' : ''}>Fixtures</Nav.Link>
-            <Nav.Link to="/table" as={Link} className={location.pathname === '/table' ? 'square border-bottom border-white' : ''}>Table</Nav.Link>
             <Nav.Link to="/results" as={Link} className={location.pathname === '/results' ? 'square border-bottom border-white' : ''}>Results</Nav.Link>
+            <Nav.Link to="/table" as={Link} className={location.pathname === '/table' ? 'square border-bottom border-white' : ''}>Table</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
