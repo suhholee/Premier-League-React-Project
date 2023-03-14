@@ -42,16 +42,17 @@ const Fixtures = () => {
         // The fullDateString needs to be passed differently for months below 9 because the API link requires a YYYY/MM/DD format
         if (currentMonth < 7) {
           fullDateString = `${currentYear}-0${currentMonth + 1}-${currentDate}`
-          const { data: { matches } } = await authenticated.get(`/competitions/2021/matches?season=${currentYear - 1}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
+          const { data: { matches } } = await authenticated.get(`/api/competitions/2021/matches?season=${currentYear - 1}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
           setFixtures(matches)
+          console.log(matches)
         } else if (currentMonth >= 7) {
           if (currentMonth >= 9) {
             fullDateString = `${currentYear}-${currentMonth + 1}-${currentDate}`
-            const { data: { matches } } = await authenticated.get(`/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
+            const { data: { matches } } = await authenticated.get(`/api/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
             setFixtures(matches)
           } else {
             fullDateString = `${currentYear}-0${currentMonth + 1}-${currentDate}`
-            const { data: { matches } } = await authenticated.get(`/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
+            const { data: { matches } } = await authenticated.get(`/api/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
             setFixtures(matches)
           }
         }
@@ -63,6 +64,8 @@ const Fixtures = () => {
     }
     getFixtures()
   }, [])
+  
+  console.log(fixtures.length)
 
   return (
     <main>

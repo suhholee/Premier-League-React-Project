@@ -32,7 +32,7 @@ const Results = () => {
     // This function will get the current Premier League fixtures
     const getResults = async () => {
       try {
-        const { data: { matches } } = await authenticated.get('/competitions/2021/matches?season=2022&status=FINISHED')
+        const { data: { matches } } = await authenticated.get('/api/competitions/2021/matches?season=2022&status=FINISHED')
         setResults(matches)
         setRequestSuccessful(true)
       } catch (err) {
