@@ -46,16 +46,16 @@ const Fixtures = () => {
         }
         if (currentMonth < 7) {
           fullDateString = `${currentYear}-0${currentMonth + 1}-${currentDate}`
-          const { data: { matches } } = await authenticated.get(`/api/competitions/2021/matches?season=${currentYear - 1}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
+          const { data: { matches } } = await authenticated.get(`http://api.football-data.org/v4/competitions/2021/matches?season=${currentYear - 1}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
           setFixtures(matches)
         } else if (currentMonth >= 7) {
           if (currentMonth >= 9) {
             fullDateString = `${currentYear}-${currentMonth + 1}-${currentDate}`
-            const { data: { matches } } = await authenticated.get(`/api/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
+            const { data: { matches } } = await authenticated.get(`http://api.football-data.org/v4/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
             setFixtures(matches)
           } else {
             fullDateString = `${currentYear}-0${currentMonth + 1}-${currentDate}`
-            const { data: { matches } } = await authenticated.get(`/api/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
+            const { data: { matches } } = await authenticated.get(`http://api.football-data.org/v4/competitions/2021/matches?season=${currentYear}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
             setFixtures(matches)
           }
         }
