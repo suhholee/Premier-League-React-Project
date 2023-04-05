@@ -22,7 +22,10 @@ const Fixtures = () => {
   const currentYear = new Date().getFullYear()
   const currentMonth = new Date().getMonth()
   // Current date needs to be passed in order to bring in the data for today's fixtures
-  const currentDate = new Date().getDate()
+  let currentDate = new Date().getDate()
+  if (currentDate >= 1 && currentDate <= 9) {
+    currentDate = `0${currentDate}`
+  }
   // Full date string is used inside the API link. 0 in front of the month isn't added for October, November, and December
   let fullDateString
 
@@ -44,7 +47,6 @@ const Fixtures = () => {
           fullDateString = `${currentYear}-0${currentMonth + 1}-${currentDate}`
           const { data: { matches } } = await authenticated.get(`/api/competitions/2021/matches?season=${currentYear - 1}&dateTo=${fullDateString}&dateFrom=${fullDateString}`)
           setFixtures(matches)
-          console.log(matches)
         } else if (currentMonth >= 7) {
           if (currentMonth >= 9) {
             fullDateString = `${currentYear}-${currentMonth + 1}-${currentDate}`
@@ -65,7 +67,7 @@ const Fixtures = () => {
     getFixtures()
   }, [])
   
-  console.log(fixtures.length)
+  console.log(currentDate)
 
   return (
     <main>
