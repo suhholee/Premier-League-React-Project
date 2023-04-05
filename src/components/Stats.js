@@ -28,7 +28,7 @@ const Stats = () => {
     // This function will get the current Premier League table
     const getStats = async () => {
       try {
-        const { data: { scorers } } = await authenticated.get('http://api.football-data.org/v4/competitions/2021/scorers')
+        const { data: { scorers } } = await authenticated.get('https://api.football-data.org/v4/competitions/2021/scorers')
         setStats(scorers)
       } catch (err) {
         console.log(err)

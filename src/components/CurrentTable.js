@@ -36,11 +36,11 @@ const CurrentTable = () => {
         // If current month is before August, current year is subtracted by 1.
         // If the current month is after August, current year is remained the same.
         if (currentMonth < 7) {
-          const { data: { standings } } = await authenticated.get(`http://api.football-data.org/v4/competitions/2021/standings?season=${currentYear - 1}`)
+          const { data: { standings } } = await authenticated.get(`https://api.football-data.org/v4/competitions/2021/standings?season=${currentYear - 1}`)
           const { table } = standings[0]
           setTable(table)
         } else if (currentMonth >= 7) {
-          const { data: { standings } } = await authenticated.get(`http://api.football-data.org/v4/competitions/2021/standings?season=${currentYear}`)
+          const { data: { standings } } = await authenticated.get(`https://api.football-data.org/v4/competitions/2021/standings?season=${currentYear}`)
           const { table } = standings[0]
           setTable(table)
         }
