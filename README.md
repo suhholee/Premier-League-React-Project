@@ -14,6 +14,7 @@ This is my second project whilst enrolling on General Assembly’s Software Engi
 The timeframe given for this project was two days. I worked independently for this project.
 
 ## Technologies Used
+- JavaScript
 - HTML
 - React
 - SASS
@@ -406,7 +407,7 @@ https://premier-league-react-project.netlify.app/
 ### Wins
 - I was able to not only utilise the react bootstrap components learned in class, but also searched and implemented extra react bootstrap components including Tables and Forms.
 - I now feel comfortable with destructuring the elements received from the API and utilising it in parts that I need.
-- Time management was very important in this project. As the time span given was only two days, I needed to plan in the right way to accomplish the points that I set as goals in the beginning. Compared to Project 1 (https://github.com/suhholee/Space-Invaders), I feel much more comfortable in creating a wireframe that serves as a fundamental role in my code building process.
+- Time management was very important in this project. As the time span given was only two days, I needed to plan in the right way to accomplish the points that I set as goals in the beginning. Compared to [Project 1](https://github.com/suhholee/Space-Invaders), I feel much more comfortable in creating a wireframe that serves as a fundamental role in my code building process.
 
 ### Takeaways
 - I learned how to efficiently implement react, react-bootstrap, react-router-dom, and SASS to write efficient and readable code to create a dynamic app for the users. 
