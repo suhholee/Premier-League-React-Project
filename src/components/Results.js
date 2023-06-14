@@ -63,7 +63,8 @@ const Results = () => {
     const regex = new RegExp(search, 'i')
     const filteredArray = results.filter(result => 
       (regex.test(result.homeTeam.name) || regex.test(result.awayTeam.name)) && 
-      (result.homeTeam.name === currentTeamFilter || result.awayTeam.name === currentTeamFilter || currentTeamFilter === 'All'))
+      (result.homeTeam.name === currentTeamFilter || result.awayTeam.name === currentTeamFilter || currentTeamFilter === 'All')
+    )
     setFilteredResults(filteredArray)
   }
   
